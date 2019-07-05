@@ -1,16 +1,16 @@
 <?php
 $returnData = (object)[
-	"success"=> false,
-    "status"=> "",
-    "error"=>false,
+	"success" => false,
+    "status"  => "",
+    "error"   =>false,
     "messages"=>array(),
-    "data"=>(object)[]
+    "data"    =>(object)[]
 ];
 
 
-$key   =  array("Person", "Place", "Location", "Venue", "City", "Language", "Product");
-$name  = isset($_POST['newName'])?$_POST['newName']:'';
-$value = isset($_POST['newValue'])?$_POST['newValue']:'';
+$key      =  array("Person", "Place", "Location", "Venue", "City", "Language", "Product");
+$name     = isset($_POST['newName'])?$_POST['newName']:'';
+$value    = isset($_POST['newValue'])?$_POST['newValue']:'';
 $validate = in_array($value, $key);
 
 
@@ -31,12 +31,12 @@ function fatal_handler() {
         $errline = $error["line"];
         $errstr  = $error["message"];
         $errorReply = (object)[
-			"success"=> false,
-		    "status"=> 500,
-		    "error"=>true,
-		    "messages"=>array("There was an internal server error processing your request."),
-		    "data"=>(object)[
-				"name"=>$name,
+			"success"  => false,
+		    "status"   => 500,
+		    "error"    => true,
+		    "messages" => array("There was an internal server error processing your request."),
+		    "data"     => (object)[
+				"name" => $name,
 				"value"=>$value
 			]
 		];
@@ -48,19 +48,19 @@ function fatal_handler() {
 
 // validating
 if( ( $name == '' ) || (!$validate) ){
-	$returnData->success = false;
-	$returnData->status = 422;
-	$returnData->error = true;
+	$returnData->success  = false;
+	$returnData->status   = 422;
+	$returnData->error    = true;
 	$returnData->messages = array("The syntax of the request is incorrect.");
 }else{
-	$returnData->success = true;
-	$returnData->status = 200;
-	$returnData->error = false;
+	$returnData->success  = true;
+	$returnData->status   = 200;
+	$returnData->error    = false;
 	$returnData->messages = array("The list was successfully submitted and processed.");
 }
 $returnData->data = (object)[
-		"name"=>$name,
-		"value"=>$value
+		"name"  => $name,
+		"value" => $value
 	];
 echo json_encode($returnData);
 ?>

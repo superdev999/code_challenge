@@ -30,7 +30,6 @@ $(document).ready(function(){
             data: myKeyVals,
             dataType: "json",
             success: function(resultData) {
-                console.log("DATA<<<<", resultData);//fixme
                 if( resultData.success ){
                     data.push({
                         name:resultData.data.name,
